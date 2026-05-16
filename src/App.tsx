@@ -17,7 +17,7 @@ const clients = [
   { name: 'IDFC First',     img: '/clients/IDFC.png' },
   { name: 'Lux',            img: '/clients/lux.jpg' },
   { name: 'Mirchi',         img: '/clients/Radiomirchi.jpg' },
-  { name: 'Sony',           img: '/clients/sony.png' },
+  { name: 'Sony',           img: '/clients/Sony.png' },
   { name: 'ITC Limited',    img: '/clients/ITC.png' },
   { name: 'Ambuja Neotia',  img: '/clients/ambuja.jpg' },
   { name: 'Bangur Cement',  img: '/clients/bangur.jpg' },
@@ -28,7 +28,7 @@ const clients = [
 const ClientItem = ({ name, img }: { name: string; img: string | null }) => (
   <div className="flex items-center gap-5 group cursor-default shrink-0">
     {/* Logo / Initials badge */}
-    <div className="w-24 h-24 rounded-full border border-white/10 bg-white/5 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
+    <div className="w-24 h-24 flex items-center justify-center overflow-hidden flex-shrink-0  transition-all duration-500">
       {img ? (
         <img
           src={img}
@@ -442,6 +442,66 @@ useEffect(() => {
 
       <main className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-32 pb-24">
         {/* NEW QUANTIVIZE-STYLE HERO */}
+        <section className="mb-32 relative bg-primary rounded-[60px] overflow-hidden py-32 text-black">
+          {/* Slanted Banners */}
+          <div className="absolute top-[28%] -left-20 w-[150%] -rotate-6 z-10">
+            <div className="slanted-banner bg-black py-6 flex gap-24 items-center">
+              {[...Array(6)].map((_, i) => (
+                <span key={i} className='text-primary'>Accelerating Digital Experiences <span className="text-white">★</span></span>
+              ))}
+            </div>
+          </div>
+          <div className="absolute top-[83%] -right-20 w-[150%] rotate-3 z-10">
+            <div className="slanted-banner bg-white text-black py-4 flex gap-24 items-center border-y border-black/10">
+              {[...Array(6)].map((_, i) => (
+                <span key={i} className='text-primary'>Strategies that Drive Impact <span className="text-white">★</span></span>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-20">
+            <div className="flex flex-col items-center text-center mb-24">
+               <div className="flex items-center gap-2 mb-6">
+            
+                 <span className="text-3xl font-impact uppercase tracking-tighter">crea8ors</span>
+               </div>
+               <h2 className="text-4xl md:text-6xl font-impact uppercase max-w-2xl leading-none tracking-tight mb-20">
+                 Boost Your Brand's Success With <br/>
+                 <span className="text-white drop-shadow-2xl">crea8ors Digital Marketing </span>
+               </h2>
+            </div>
+
+            {/* Main Mockup Card */}
+            <div className="relative max-w-5xl mx-auto mb-24">
+               <div className="bg-dark rounded-3xl border border-white/10 p-2 md:p-4 rotate-x-6 rotate-y-3 shadow-2xl overflow-hidden group hover:rotate-0 transition-all duration-700">
+                  <div className="bg-[#111] rounded-2xl p-8 md:p-16 text-center border border-white/5 relative">
+                     <div className="absolute top-12 left-12 sticker text-primary scale-75 border-primary/20">
+                       <Zap size={20} fill="currentColor" />
+                     </div>
+                     <div className="absolute bottom-12 right-12 sticker text-white scale-75 border-white/20">
+                        <Smile size={20} />
+                     </div>
+                     
+                     <h3 className="text-5xl md:text-7xl font-impact text-white mb-8 leading-none uppercase">
+                        The only all-in-one <span className="text-primary italic">place</span><br/> to grow your Engagement
+                     </h3>
+                     <p className="text-white/40 max-w-xl mx-auto mb-10 text-sm">
+                        We deliver tailored digital marketing solutions to grow your business. From SEO to social media, let's achieve your goals together.
+                     </p>
+                     <div className="flex flex-wrap justify-center gap-6">
+                        <button className="bg-primary text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform">Sign Up For Free</button>
+                        <button className="bg-white/5 text-white border border-white/10 px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-white/10">
+                           Watch A Demo <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black">▶</div>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+
+          
+          </div>
+        </section>
         <section className="hero-section mb-24">
           <div className="relative mb-16">
             <h1 className="text-[12vw] font-black leading-[0.8] tracking-tighter font-display text-white gsap-reveal hero-line relative">
@@ -598,67 +658,7 @@ useEffect(() => {
           </div>
         </section>
 
-        {/* GLOWAD INSPIRED SHOWCASE SECTION */}
-        <section className="mb-32 relative bg-primary rounded-[60px] overflow-hidden py-32 text-black">
-          {/* Slanted Banners */}
-          <div className="absolute top-[28%] -left-20 w-[150%] -rotate-6 z-10">
-            <div className="slanted-banner bg-black py-6 flex gap-24 items-center">
-              {[...Array(6)].map((_, i) => (
-                <span key={i} className='text-primary'>Accelerating Digital Experiences <span className="text-white">★</span></span>
-              ))}
-            </div>
-          </div>
-          <div className="absolute top-[83%] -right-20 w-[150%] rotate-3 z-10">
-            <div className="slanted-banner bg-white text-black py-4 flex gap-24 items-center border-y border-black/10">
-              {[...Array(6)].map((_, i) => (
-                <span key={i} className='text-primary'>Strategies that Drive Impact <span className="text-white">★</span></span>
-              ))}
-            </div>
-          </div>
-
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-20">
-            <div className="flex flex-col items-center text-center mb-24">
-               <div className="flex items-center gap-2 mb-6">
-            
-                 <span className="text-3xl font-impact uppercase tracking-tighter">crea8ors</span>
-               </div>
-               <h2 className="text-4xl md:text-6xl font-impact uppercase max-w-2xl leading-none tracking-tight mb-20">
-                 Boost Your Brand's Success With <br/>
-                 <span className="text-white drop-shadow-2xl">crea8ors Digital Marketing </span>
-               </h2>
-            </div>
-
-            {/* Main Mockup Card */}
-            <div className="relative max-w-5xl mx-auto mb-24">
-               <div className="bg-dark rounded-3xl border border-white/10 p-2 md:p-4 rotate-x-6 rotate-y-3 shadow-2xl overflow-hidden group hover:rotate-0 transition-all duration-700">
-                  <div className="bg-[#111] rounded-2xl p-8 md:p-16 text-center border border-white/5 relative">
-                     <div className="absolute top-12 left-12 sticker text-primary scale-75 border-primary/20">
-                       <Zap size={20} fill="currentColor" />
-                     </div>
-                     <div className="absolute bottom-12 right-12 sticker text-white scale-75 border-white/20">
-                        <Smile size={20} />
-                     </div>
-                     
-                     <h3 className="text-5xl md:text-7xl font-impact text-white mb-8 leading-none uppercase">
-                        The only all-in-one <span className="text-primary italic">analytics</span><br/> tool for your Engagement
-                     </h3>
-                     <p className="text-white/40 max-w-xl mx-auto mb-10 text-sm">
-                        We deliver tailored digital marketing solutions to grow your business. From SEO to social media, let's achieve your goals together.
-                     </p>
-                     <div className="flex flex-wrap justify-center gap-6">
-                        <button className="bg-primary text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform">Sign Up For Free</button>
-                        <button className="bg-white/5 text-white border border-white/10 px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-white/10">
-                           Watch A Demo <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black">▶</div>
-                        </button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-
-          
-          </div>
-        </section>
+       
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
           {/* THE REST OF THE BENTO GRID STARTS HERE */}
