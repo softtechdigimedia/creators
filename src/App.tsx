@@ -10,6 +10,47 @@ import { cn } from './lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 gsap.registerPlugin(ScrollTrigger);
+const clients = [
+  { name: 'Senco Gold',     img: '/clients/senco.png' },
+  { name: 'Wow Momo',       img: '/clients/Wow.jpg' },
+  { name: 'UltraTech',      img: '/clients/ultra.png' },
+  { name: 'IDFC First',     img: '/clients/IDFC.png' },
+  { name: 'Lux',            img: '/clients/lux.jpg' },
+  { name: 'Mirchi',         img: '/clients/Radiomirchi.jpg' },
+  { name: 'Sony',           img: '/clients/sony.png' },
+  { name: 'ITC Limited',    img: '/clients/ITC.png' },
+  { name: 'Ambuja Neotia',  img: '/clients/ambuja.jpg' },
+  { name: 'Bangur Cement',  img: '/clients/bangur.jpg' },
+    { name: 'keo karpin',  img: '/clients/keokarpin.webp' },
+      { name: 'dava india',  img: '/clients/davaindia.png' },
+        { name: 'idestiny',  img: '/clients/idestiny.png' },
+];
+const ClientItem = ({ name, img }: { name: string; img: string | null }) => (
+  <div className="flex items-center gap-5 group cursor-default shrink-0">
+    {/* Logo / Initials badge */}
+    <div className="w-24 h-24 rounded-full border border-white/10 bg-white/5 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
+      {img ? (
+        <img
+          src={img}
+          alt={name}
+          className="w-full h-full object-contain p-2 filter transition-all duration-500"
+        />
+      ) : (
+        <span className="text-white/20 group-hover:text-primary/60 transition-all duration-500 font-mono text-xs font-bold tracking-widest uppercase">
+          {name.split(' ').map(w => w[0]).join('').slice(0, 2)}
+        </span>
+      )}
+    </div>
+
+    {/* Client name */}
+    <span className="text-5xl md:text-7xl font-impact font-black text-white/5 group-hover:text-primary transition-all duration-500 uppercase tracking-tighter">
+      {name}
+    </span>
+
+    {/* Separator dot */}
+    <span className="text-white/10 text-2xl mx-2 flex-shrink-0">·</span>
+  </div>
+);
 
 export default function App() {
   const container = useRef<HTMLDivElement>(null);
@@ -18,6 +59,18 @@ export default function App() {
   const [showButtons, setShowButtons] = useState(false);
 const containerRef = useRef<HTMLDivElement>(null);
 const [levitated, setLevitated] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      setScrollProgress(progress);
+      setShowButtons(scrolled > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
 useEffect(() => {
   const el = containerRef.current;
@@ -431,9 +484,9 @@ useEffect(() => {
 
           <div className="relative h-[600px] rounded-[40px] overflow-hidden group gsap-reveal">
              <img 
-               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000" 
+               src="/hero.png" 
                alt="Team at work" 
-               className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-1000" 
+               className="w-full h-full object-cover  opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-1000" 
              />
              <div className="absolute top-0 left-0 p-8 flex gap-12 text-[10px] font-mono uppercase tracking-[0.3em] text-white/40">
                 <span>Performance Marketing</span>
@@ -488,7 +541,7 @@ useEffect(() => {
             <div className="font-impact text-[8vw] md:text-[10vw] leading-[0.85] tracking-tighter uppercase gsap-reveal">
               <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mb-4">
                 <span className="text-white">WE</span>
-                <span className="text-[#00D1FF] relative">
+                <span className="text-primary relative">
                   GROW
                   <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#FFD200] rounded-full flex items-center justify-center text-black rotate-12">
                     <Smile size={20} fill="currentColor" />
@@ -504,14 +557,14 @@ useEffect(() => {
                     <Zap size={40} fill="currentColor" />
                   </div>
                 </span>
-                <span className="text-[#00D1FF]">EXPERIENCES</span>
+                <span className="text-primary">EXPERIENCES</span>
                 <span className="text-white">&</span>
               </div>
 
               <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
                 <span className="text-[#00FF9C]">SOLVE</span>
                 <span className="text-white">BUSINESS</span>
-                <span className="text-[#FF4DA6] relative">
+                <span className="text-[#00FF9C] relative">
                   PROBLEMS.
                   <div className="absolute -bottom-4 -right-8 sticker text-white/20 rotate-45">
                     <Target size={20} />
@@ -733,14 +786,14 @@ useEffect(() => {
             name: "Sunando Chakraborty", 
             role: "Co-founder & Director", 
             desc: "15+ years experience in business development and client strategy. Storyteller & brand enthusiast.",
-            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
+            img: "/banerjee.png",
             reveal: "gsap-reveal-left"
           },
           { 
             name: "Shubhadeep Sarkaar", 
             role: "Director", 
             desc: "15+ years expertise in sales and marketing across leading media groups including India Today.",
-            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600",
+            img: "/sarkar.png",
             reveal: "gsap-reveal-right"
           }
         ].map((director, idx) => (
@@ -852,27 +905,22 @@ useEffect(() => {
       </section>
 
       {/* CLIENT TICKER */}
-      <section id="clients" className="py-24 border-b border-white/5 bg-dark">
-        <div className="max-w-[1440px] mx-auto px-12 mb-12 flex items-center gap-6 gsap-reveal">
-          <span className="font-mono text-[10px] uppercase font-bold opacity-30 tracking-[0.3em]">Industry Partners</span>
-          <div className="h-[1px] flex-1 bg-white/5" />
-        </div>
-        <div className="flex whitespace-nowrap overflow-hidden">
-            <div className="client-ticker flex gap-24 items-center py-6">
-            {['Senco Gold', 'Wow Momo', 'UltraTech', 'IDFC First', 'Lux', 'Mirchi', 'Sony', 'ITC Limited', 'Ambuja Neotia', 'Bangur Cement'].map((client, idx) => (
-              <span key={idx} className="text-6xl md:text-8xl font-impact font-black text-white/5 hover:text-primary transition-all duration-500 cursor-default uppercase tracking-tighter">
-                {client}
-              </span>
-            ))}
-            {/* Repeat for seamless loop */}
-            {['Senco Gold', 'Wow Momo', 'UltraTech', 'IDFC First', 'Lux', 'Mirchi', 'Sony', 'ITC Limited', 'Ambuja Neotia', 'Bangur Cement'].map((client, idx) => (
-              <span key={idx + 10} className="text-6xl md:text-8xl font-impact font-black text-white/5 hover:text-primary transition-all duration-500 cursor-default uppercase tracking-tighter">
-                {client}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+   <section id="clients" className="py-24 border-b border-white/5 bg-dark">
+  <div className="max-w-[1440px] mx-auto px-12 mb-12 flex items-center gap-6 gsap-reveal">
+    <span className="font-mono text-[10px] uppercase font-bold opacity-30 tracking-[0.3em]">
+      Industry Partners
+    </span>
+    <div className="h-[1px] flex-1 bg-white/5" />
+  </div>
+
+  <div className="flex whitespace-nowrap overflow-hidden">
+    <div className="client-ticker flex gap-16 items-center py-6">
+      {[...clients, ...clients].map((client, idx) => (
+        <ClientItem key={idx} name={client.name} img={client.img} />
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* NEW SECTION 1: EVENTS ARC */}
       <section className="py-40 relative overflow-hidden  text-white">
@@ -924,7 +972,7 @@ useEffect(() => {
           <div className="grid md:grid-cols-3 gap-8 md:gap-0 mt-20 relative px-4">
              <div className="md:-rotate-12 transform-gpu gsap-reveal-left mb-8 md:mb-0">
                 <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="External" />
+                  <img src="/externalevents.png" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="External" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
                      <p className="text-2xl font-impact uppercase tracking-tight">External Events</p>
                   </div>
@@ -933,7 +981,7 @@ useEffect(() => {
              
              <div className="z-20 md:scale-110 transform-gpu gsap-reveal mb-8 md:mb-0">
                 <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Corporate" />
+                  <img src="/corporateevents.png" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Corporate" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
                      <p className="text-2xl font-impact uppercase tracking-tight">Corporate Events</p>
                   </div>
@@ -942,9 +990,9 @@ useEffect(() => {
 
              <div className="md:rotate-12 transform-gpu gsap-reveal-right">
                 <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="https://images.unsplash.com/photo-1514525253361-bee8a1874298?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Internal" />
+                  <img src="/internalevents.png`" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Internal" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                     <p className="text-2xl font-impact uppercase tracking-tight">Internal Events</p>
+                     <p className="text-2xl font-impact uppercase tracking-tight ml-8">Internal Events</p>
                   </div>
                 </div>
              </div>
@@ -1329,7 +1377,7 @@ useEffect(() => {
             <div className="mt-48 group">
               <div className="text-[10px] font-mono text-white/40 mb-4 tracking-widest">02</div>
               <div className="relative aspect-square overflow-hidden rounded-3xl mb-8">
-                 <img src="https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?auto=format&fit=crop&q=80&w=800" alt="Maui" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+                 <img src="/base.png" alt="Maui" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
               </div>
               <h3 className="text-4xl font-impact font-medium mb-4 leading-tight uppercase">Scaling Maui past <span className="text-primary italic">$10M ARR</span> via Meta Ads</h3>
          
@@ -1347,7 +1395,7 @@ useEffect(() => {
               </div>
               <h3 className="text-4xl font-impact font-medium mb-8 uppercase tracking-tighter">Ai <span className="text-outline">digital</span> art project</h3>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[40px] mb-8">
-                 <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200" alt="Ai art" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+                 <img src="/base1.png" alt="Ai art" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
               </div>
               <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">2025 - Maui Moisture</p>
               <p className="text-white/40 leading-relaxed max-w-sm">An exploration of nature-inspired forms created through AI, blending digital imagination with organic beauty.</p>
