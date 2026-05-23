@@ -519,7 +519,7 @@ useEffect(() => {
           <div className="grid md:grid-cols-3 gap-12 mb-16 border-t border-white/5 pt-12">
             <div className="flex items-center gap-4 hero-line gsap-reveal-left">
               <div className="w-12 h-12 rounded-full overflow-hidden grayscale">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" alt="Sunando" className="w-full h-full object-cover" />
+                <img src="/banerjee.png" alt="Sunando" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="text-sm font-bold">Sunando Chakraborty</p>
