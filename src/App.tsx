@@ -413,7 +413,7 @@ useEffect(() => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-dark/60 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center h-20">
         <div className="flex items-center gap-2">
-         <img src="/logo.png" alt="Logo" className='w-40 h-15' />
+         <img src="/logo.jpeg" alt="Logo" className='w-40 h-15 rounded-2xl' />
         </div>
         
         <div className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">
@@ -1419,7 +1419,7 @@ useEffect(() => {
             <div className="lg:col-span-4 gsap-reveal-left">
               <div className="flex items-center gap-3 mb-16">
            
-                    <img src="/logo.png" alt="Logo" className='w-60 h-25' />
+                    <img src="/logo.jpeg" alt="Logo" className='w-60 h-25 rounded-2xl' />
            
             
               </div>
