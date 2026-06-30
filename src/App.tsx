@@ -8,6 +8,10 @@ import { ArrowRight, Mail,  Award, CheckCircle2, Menu, X, ExternalLink, Zap, Tar
 import Lenis from 'lenis';
 import { cn } from './lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import PortfolioGallery from './components/PortfolioGallery';
+import EventsGallery from './components/EventsGallery';
+import VideoShowcaseSection from './components/VideoShowcaseSection';
+import BrandShowcase from './components/BrandShowcase';
 
 gsap.registerPlugin(ScrollTrigger);
 const clients = [
@@ -319,21 +323,21 @@ useEffect(() => {
       text: "Closest to the promises made by anyone regarding execution. Amazing teamwork",
       author: "Swarnojit Sengupta",
       role: "Wow Momo",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+      image: "/user.png",
       rating: 5
     },
     {
       text: "Outstanding planning with immaculate execution. Thumbs up for the entire team.",
       author: "S. Sureka",
       role: "Lux Industries",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+      image: "/user.png",
       rating: 5
     },
     {
       text: "Epic ideation and execution is absolutely in sync. More power to the Crea8ors team. Keep up the good work",
       author: "S. Sengupta",
       role: "Ultra Tech Cement",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+      image: "/user.png",
       rating: 5
     }
   ];
@@ -411,9 +415,9 @@ useEffect(() => {
       </AnimatePresence>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-dark/60 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center h-20">
+      <nav className="fixed top-1 w-full z-50 bg-dark/60 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center h-20">
         <div className="flex items-center gap-2">
-         <img src="/logo.jpeg" alt="Logo" className='w-40 h-15 rounded-2xl' />
+         <img src="/logo.jpeg" alt="Logo" className='w-40 h-15 rounded-2xl ' />
         </div>
         
         <div className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">
@@ -878,39 +882,17 @@ useEffect(() => {
 
       </main>
 
-      {/* PORTFOLIO SECTION - HORIZONTAL SCROLL RE-STYLED */}
-        <section id="projects" className="projects-container overflow-hidden bg-[#0A0A0A]">
-        <div className="projects-wrapper h-screen flex items-center px-6 lg:px-24 gap-12">
-          <div className="flex-shrink-0 w-[400px]">
-            <span className="text-primary font-mono text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">// Portfolio</span>
-            <h3 className="text-9xl font-impact font-black leading-[0.8] tracking-tighter mb-8 uppercase">FEATURED<br/><span className="text-outline italic">WORKS.</span></h3>
-            <p className="text-white/40 max-w-xs text-sm">Scroll horizontally to explore our tactical activations and events.</p>
-          </div>
-          {[
-            { title: "Mirchi Boombox", category: "Mega Event", img: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=800" },
-            { title: "UltraTech Cement", category: "Upcountry Promotion", img: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800" },
-            { title: "Platform IP", category: "Business Summit", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=800" },
-            { title: "ShyamSel Meet", category: "Fabricator Meet", img: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800" },
-            { title: "Zimba Festive", category: "Sales Activation", img: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=800" }
-          ].map((project, idx) => (
-            <div key={idx} className="project-card flex-shrink-0 w-[550px] h-[400px] relative group overflow-hidden rounded-[40px] border border-white/5 shadow-2xl">
-              <img src={project.img} alt={project.title} className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent p-12 flex flex-col justify-end">
-                <span className="font-mono text-[10px] uppercase font-bold text-primary tracking-widest mb-2">{project.category}</span>
-                <h4 className="text-white text-5xl font-impact font-medium tracking-tight uppercase">{project.title}</h4>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <PortfolioGallery />
 
+
+      
       {/* CLIENT TICKER */}
    <section id="clients" className="py-24 border-b border-white/5 bg-dark">
-  <div className="max-w-[1440px] mx-auto px-12 mb-12 flex items-center gap-6 gsap-reveal">
-    <span className="font-mono text-[10px] uppercase font-bold opacity-30 tracking-[0.3em]">
+    <div className="max-w-[1440px] mx-auto px-12 mb-12 flex items-center gap-6 gsap-reveal">
+     <span className="font-mono text-[10px] uppercase font-bold opacity-30 tracking-[0.3em]">
       Industry Partners
-    </span>
-    <div className="h-[1px] flex-1 bg-white/5" />
+     </span>
+     <div className="h-[1px] flex-1 bg-white/5" />
   </div>
 
   <div className="flex whitespace-nowrap overflow-hidden">
@@ -923,82 +905,9 @@ useEffect(() => {
 </section>
 
       {/* NEW SECTION 1: EVENTS ARC */}
-      <section className="py-40 relative overflow-hidden  text-white">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,50 Q25,20 50,50 T100,50" fill="none" stroke="white" strokeWidth="0.1" />
-            <path d="M0,60 Q25,30 50,60 T100,60" fill="none" stroke="white" strokeWidth="0.1" />
-            <path d="M0,40 Q25,10 50,40 T100,40" fill="none" stroke="white" strokeWidth="0.1" />
-          </svg>
-        </div>
+<EventsGallery />
 
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <div className="gsap-reveal mb-12">
-             <span className="text-sm font-bold uppercase tracking-[0.3em] opacity-80 mb-4 block">We make every</span>
-             <h2 className="text-[12vw] md:text-[10vw] font-impact leading-none uppercase tracking-tighter">Events</h2>
-             <span className="text-3xl font-display italic opacity-60 mt-4 block">like:</span>
-          </div>
-
-          {/* ARC SMILE GRAPHIC */}
-          <div className="relative mt-20 mb-32 flex justify-center items-center">
-             <svg className="w-[300px] md:w-[600px] h-[100px] md:h-[200px]" viewBox="0 0 600 200">
-                <path 
-                  d="M50,50 Q300,250 550,50" 
-                  fill="none" 
-                  stroke="white" 
-                  strokeWidth="8" 
-                  strokeLinecap="round"
-                  className="opacity-20"
-                />
-                <path 
-                  className="events-smile-path"
-                  d="M50,50 Q300,250 550,50" 
-                  fill="none" 
-                  stroke="white" 
-                  strokeWidth="8" 
-                  strokeLinecap="round"
-                  strokeDasharray="1000"
-                  strokeDashoffset="1000"
-                />
-                {/* NODES */}
-                <circle cx="50" cy="50" r="10" fill="#FF4B2B" className="gsap-reveal" />
-                <circle cx="200" cy="140" r="10" fill="#FFB400" className="gsap-reveal" />
-                <circle cx="400" cy="140" r="10" fill="#00C9FF" className="gsap-reveal" />
-                <circle cx="550" cy="50" r="10" fill="#2B32B2" className="gsap-reveal" />
-             </svg>
-          </div>
-
-          {/* FAN IMAGES */}
-          <div className="grid md:grid-cols-3 gap-8 md:gap-0 mt-20 relative px-4">
-             <div className="md:-rotate-12 transform-gpu gsap-reveal-left mb-8 md:mb-0">
-                <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="/externalevents.png" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="External" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                     <p className="text-2xl font-impact uppercase tracking-tight">External Events</p>
-                  </div>
-                </div>
-             </div>
-             
-             <div className="z-20 md:scale-110 transform-gpu gsap-reveal mb-8 md:mb-0">
-                <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="/corporateevents.png" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Corporate" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                     <p className="text-2xl font-impact uppercase tracking-tight">Corporate Events</p>
-                  </div>
-                </div>
-             </div>
-
-             <div className="md:rotate-12 transform-gpu gsap-reveal-right">
-                <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative group bg-black/20">
-                  <img src="/internalevents.png`" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Internal" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                     <p className="text-2xl font-impact uppercase tracking-tight ml-8">Internal Events</p>
-                  </div>
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
+<VideoShowcaseSection />
 
       {/* NEW SECTION 2: WE ARE ONE */}
       <section className="min-h-screen grid lg:grid-cols-12 bg-dark border-t border-white/5 overflow-hidden">
@@ -1041,6 +950,7 @@ useEffect(() => {
            ))}
         </div>
       </section>
+      <BrandShowcase />
 
       {/* BRAND BENEFIT SECTION */}
       <section className="py-40 bg-black border-t border-white/5 relative overflow-hidden">
@@ -1472,7 +1382,8 @@ useEffect(() => {
           {/* Social and Copyright */}
           <div className="pt-12 border-t border-white/5 grid md:grid-cols-2 gap-12 items-center gsap-reveal-left">
             <div className="flex items-center gap-12 text-[10px] font-mono uppercase tracking-[0.3em] text-white/40">
-               <span>© All right reserved @Rylic Studio-2025</span>
+               <span>© All right reserved @Crea8ors {new Date().getFullYear()}.
+               </span>
                <div className="flex items-center gap-6">
                   {/* <a href="#" className="hover:text-primary transition-all"><Facebook size={14} /></a>
                   <a href="#" className="hover:text-primary transition-all"><Instagram size={14} /></a>
@@ -1486,10 +1397,10 @@ useEffect(() => {
               <a href="#" className="hover:text-white transition-all">Site Index</a>
             </div>
           </div>
-
-         <div
+         
+        <div
   ref={containerRef}
-  className="mt-40 opacity-100 select-none overflow-visible pb-[300px] footer-crea8ors-container relative"
+  className="mt-40 opacity-100 select-none overflow-visible pb-[100px] footer-crea8ors-container relative"
 >
   <h6 className="text-[25vw] font-impact font-black leading-none whitespace-nowrap uppercase flex justify-center items-center">
     <span className="text-white/30 tracking-normal">crea</span>
@@ -1506,6 +1417,9 @@ useEffect(() => {
   </h6>
 </div>
         </div>
+        <div className="mt-12 text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 text-center">
+       <a href="#" className="hover:text-white transition-all  ">Designed & Developed by Soft Tech Digi Media</a>
+       </div>
       </footer>
     </div>
   );
