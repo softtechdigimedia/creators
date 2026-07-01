@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight, Mail,  Award, CheckCircle2, Menu, X, ExternalLink, Zap, Target, Palette,  Search, BarChart3, Video, Users, ShoppingBag, Globe, Smile, ChevronLeft, ChevronRight, ArrowUp, MessageCircle } from 'lucide-react';
+import { ArrowRight, Mail,  Award, CheckCircle2, Menu, X,  Zap, Target, Palette,  Search, BarChart3, Video, Users, ShoppingBag, Globe, Smile, ChevronLeft, ChevronRight, ArrowUp, MessageCircle } from 'lucide-react';
 import Lenis from 'lenis';
 import { cn } from './lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
