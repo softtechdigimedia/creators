@@ -177,7 +177,7 @@ const projects = [
       "/ITC CANTER/ITC Canter4.jpeg",
       "/ITC CANTER/ITC Canter5.jpeg",
       "/ITC CANTER/ITC Canter6.jpeg",
-      "",
+
     ],
   },
    {
