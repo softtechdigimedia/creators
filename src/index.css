@@ -19,8 +19,12 @@
 
 @layer utilities {
   .text-outline {
-    -webkit-text-stroke: 1px currentColor;
-    color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-outline-thin {
+    -webkit-text-stroke: 0.75px currentColor;
+    -webkit-text-fill-color: transparent;
   }
   .slanted-banner {
     @apply py-4 bg-black text-glow whitespace-nowrap overflow-hidden font-impact text-2xl uppercase tracking-widest;

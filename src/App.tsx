@@ -1,5 +1,3 @@
-
-
 import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,7 +9,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import PortfolioGallery from './components/PortfolioGallery';
 import EventsGallery from './components/EventsGallery';
 import VideoShowcaseSection from './components/VideoShowcaseSection';
-import BrandShowcase from './components/BrandShowcase';
+
 
 gsap.registerPlugin(ScrollTrigger);
 const clients = [
@@ -341,6 +339,44 @@ useEffect(() => {
       rating: 5
     }
   ];
+    // Sleek Contact Form States
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    website: '',
+    message: '',
+  });
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedBudget, setSelectedBudget] = useState<string>('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleServiceToggle = (service: string) => {
+    setSelectedServices(prev => 
+      prev.includes(service) 
+        ? prev.filter(s => s !== service) 
+        : [...prev, service]
+    );
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email) return;
+    setIsSubmitting(true);
+    
+    // Simulate premium backend ingestion with custom micro-interaction timeline
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 1800);
+  };
+
+  const resetForm = () => {
+    setFormData({ name: '', email: '', website: '', message: '' });
+    setSelectedServices([]);
+    setSelectedBudget('');
+    setIsSubmitted(false);
+  };
 
   const [activeBenefit, setActiveBenefit] = useState<number | null>(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -559,7 +595,7 @@ useEffect(() => {
              </div>
              <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent" />
              <div className="absolute bottom-12 left-12">
-                <a href="#projects" className="bg-orange-600 text-white px-8 py-5 rounded-2xl font-bold flex items-center gap-3 hover:bg-white hover:text-black transition-all group shadow-2xl">
+                <a href="#projects" className="bg-primary text-white px-8 py-5 rounded-2xl font-bold flex items-center gap-3 hover:bg-white hover:text-black transition-all group shadow-2xl">
                   Scale your revenue <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                 </a>
              </div>
@@ -583,16 +619,16 @@ useEffect(() => {
         {/* NEW EXPRESSIVE BRAND STATEMENT SECTION */}
         <section className="mb-32 relative py-32 bg-[#0C0616] rounded-[60px] border border-white/5 overflow-hidden">
           {/* Floating Stickers */}
-          <div className="absolute top-12 left-12 sticker text-[#FFD200] -rotate-12 animate-bounce">
+          <div className="absolute top-12 left-12 sticker text-primary -rotate-12 animate-bounce">
             <Zap size={24} fill="currentColor" />
           </div>
-          <div className="absolute top-24 right-24 sticker text-[#00FF9C] rotate-45 scale-150">
-            <Smile size={24} />
+          <div className="absolute top-24 right-24 sticker text-primary rotate-45 scale-150">
+            <Smile size={24}  />
           </div>
-          <div className="absolute bottom-24 left-32 sticker text-[#00D1FF] -rotate-45">
+          <div className="absolute bottom-24 left-32 sticker text-primary -rotate-45">
             <Target size={24} />
           </div>
-          <div className="absolute top-1/2 right-12 sticker text-[#FF4DA6] rotate-12 scale-125">
+          <div className="absolute top-1/2 right-12 sticker text-primary rotate-12 scale-125">
              <div className="w-8 h-8 rounded-full border-2 border-current flex items-center justify-center font-impact">8</div>
           </div>
           <div className="absolute bottom-12 right-[40%] text-white/10 opacity-20">
@@ -617,7 +653,7 @@ useEffect(() => {
               <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mb-4">
                 <span className="relative inline-block">
                   <span className="text-outline text-white px-4 border-2 border-white/20 rounded-[50%_40%] py-2">CREATE</span>
-                  <div className="absolute -top-8 -left-8 text-[#FF4DA6] -rotate-12">
+                  <div className="absolute -top-8 -left-8 text-primary -rotate-12">
                     <Zap size={40} fill="currentColor" />
                   </div>
                 </span>
@@ -626,12 +662,12 @@ useEffect(() => {
               </div>
 
               <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
-                <span className="text-[#00FF9C]">SOLVE</span>
+                <span className="text-primary">SOLVE</span>
                 <span className="text-white">BUSINESS</span>
-                <span className="text-[#00FF9C] relative">
+                <span className="text-primary relative">
                   PROBLEMS.
                   <div className="absolute -bottom-4 -right-8 sticker text-white/20 rotate-45">
-                    <Target size={20} />
+                    <Target size={20}  />
                   </div>
                 </span>
               </div>
@@ -927,9 +963,9 @@ useEffect(() => {
         {/* Right Side: Panels */}
         <div className="lg:col-span-8 flex flex-col md:flex-row h-full min-h-[600px] bg-black">
            {[
-             { num: "01", title: "#Pointone", img: "https://images.unsplash.com/photo-1449156001935-d2863fb72690?auto=format&fit=crop&q=80&w=800", text: "Strategic market positioning with surgical precision." },
-             { num: "02", title: "#Pointtwo", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800", text: "Human-centric creatives connecting at scale." },
-             { num: "03", title: "#Pointthree", img: "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&q=80&w=800", text: "Scalable growth systems built for the modern era." }
+             { num: "01", title: "#Pointone", img: "/point1.png", text: "Strategic market positioning with surgical precision." },
+             { num: "02", title: "#Pointtwo", img: "/point2.png", text: "Human-centric creatives connecting at scale." },
+             { num: "03", title: "#Pointthree", img: "/point3.png", text: "Scalable growth systems built for the modern era." }
            ].map((panel, idx) => (
              <div key={idx} className="flex-1 relative group overflow-hidden border-b md:border-b-0 md:border-r border-white/5 md:last:border-r-0 h-full flex flex-col justify-end p-12 transition-all duration-700 hover:flex-[1.5] hover:bg-white/5">
                 <div className="absolute inset-0 z-0">
@@ -950,7 +986,7 @@ useEffect(() => {
            ))}
         </div>
       </section>
-      <BrandShowcase />
+      {/* <BrandShowcase /> */}
 
       {/* BRAND BENEFIT SECTION */}
       <section className="py-40 bg-black border-t border-white/5 relative overflow-hidden">
@@ -1269,50 +1305,281 @@ useEffect(() => {
           </div>
         </div>
       </section>
+            <section id="contact-form" className="py-24 md:py-40 bg-[#030807] border-t border-white/5 relative overflow-hidden selection:bg-primary selection:text-black">
+        {/* Ambient background glows */}
+        <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute bottom-1/4 right-10 w-[500px] h-[500px] bg-[#8E2DE2]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
-      {/* NEW CASE STUDY SECTION */}
-      <section className="py-32 bg-[#050C0A] border-t border-white/5">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-24">
-          <div className="gsap-reveal-left flex flex-col justify-center">
-        
-            <h2 className="text-7xl md:text-8xl font-impact font-medium tracking-tight mb-8 leading-[0.9] uppercase italic">Work that drives <span className="text-outline">revenue</span></h2>
-            <p className="text-white/40 text-lg mb-12 max-w-sm">Detailed breakdowns of how we scaled our clients past their limits.</p>
-            <div>
-               <button className="bg-primary text-black px-8 py-4 rounded-xl flex items-center gap-3 font-bold hover:bg-white transition-all">
-                   Success Stories <ArrowRight size={20} />
-               </button>
-            </div>
-
-            {/* Project 02 - Left Side Bottom */}
-            <div className="mt-48 group">
-              <div className="text-[10px] font-mono text-white/40 mb-4 tracking-widest">02</div>
-              <div className="relative aspect-square overflow-hidden rounded-3xl mb-8">
-                 <img src="/base.png" alt="Maui" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-12 gap-10 xl:gap-20 items-start">
+            
+            {/* Left Info Column */}
+            <div className="lg:col-span-5 gsap-reveal-left">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
+                  Let's Connect
+                </span>
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              
               </div>
-              <h3 className="text-4xl font-impact font-medium mb-4 leading-tight uppercase">Scaling Maui past <span className="text-primary italic">$10M ARR</span> via Meta Ads</h3>
-         
-            </div>
-          </div>
+              
+              <h2 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-impact font-medium leading-[0.95] uppercase tracking-tighter mb-8">
+                Ready to <span className="text-outline">Scale</span>?<br />
+                Get Your <span className="text-primary italic">Free Audit</span>
+              </h2>
+              
+              <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-lg">
+                Stop guessing. We'll run a deep-dive analysis on your acquisition funnels, copy angles, and creative assets — then deliver a clear roadmap to 3x your efficiency.
+              </p>
 
-          <div className="gsap-reveal-right">
-            {/* Project 01 - Right Side Top */}
-            <div className="group">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-[10px] font-mono text-white/40 tracking-widest">01</span>
-                <div className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all">
-                  <ExternalLink size={16} />
+              <div className="space-y-6 max-w-md">
+                <div className="flex items-center gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all duration-500 group">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                    <Mail size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-widest">Inquiries</h4>
+                    <p className="text-lg font-bold text-white group-hover:text-primary transition-colors">partner@crea8ors.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all duration-500 group">
+                  <div className="w-12 h-12 bg-[#8E2DE2]/10 rounded-2xl flex items-center justify-center text-[#8E2DE2] group-hover:scale-110 transition-transform duration-500">
+                    <MessageCircle size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-widest">Quick Chat</h4>
+                    <p className="text-lg font-bold text-white">Book a 15-Min Strategy Session</p>
+                  </div>
                 </div>
               </div>
-              <h3 className="text-4xl font-impact font-medium mb-8 uppercase tracking-tighter">Ai <span className="text-outline">digital</span> art project</h3>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[40px] mb-8">
-                 <img src="/base1.png" alt="Ai art" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
-              </div>
-              <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">2025 - Maui Moisture</p>
-              <p className="text-white/40 leading-relaxed max-w-sm">An exploration of nature-inspired forms created through AI, blending digital imagination with organic beauty.</p>
             </div>
+
+            {/* Right Interactive Form Card Column */}
+            <div className="lg:col-span-7 w-full">
+              <div className="relative bg-white/[0.01] border border-white/5 backdrop-blur-2xl rounded-[40px] p-6 sm:p-8 md:p-12 shadow-[0_30px_100px_rgba(0,0,0,0.8)] overflow-hidden">
+                <AnimatePresence mode="wait">
+                  {!isSubmitted ? (
+                    <motion.form 
+                      key="lead-form"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.5 }}
+                      onSubmit={handleFormSubmit}
+                      className="space-y-8"
+                    >
+                      {/* Name & Email inputs in 2 columns on desktop */}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="relative group">
+                          <input 
+                            type="text" 
+                            required
+                            id="form-name"
+                            value={formData.name}
+                            onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                            placeholder=" "
+                            className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium"
+                          />
+                          <label 
+                            htmlFor="form-name"
+                            className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
+                          >
+                            Full Name *
+                          </label>
+                        </div>
+
+                        <div className="relative group">
+                          <input 
+                            type="email" 
+                            required
+                            id="form-email"
+                            value={formData.email}
+                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                            placeholder=" "
+                            className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium"
+                          />
+                          <label 
+                            htmlFor="form-email"
+                            className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
+                          >
+                            Work Email *
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Company website input */}
+                      <div className="relative group">
+                        <input 
+                          type="url" 
+                          id="form-website"
+                          value={formData.website}
+                          onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
+                          placeholder=" "
+                          className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium"
+                        />
+                        <label 
+                          htmlFor="form-website"
+                          className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
+                        >
+                          Company Website
+                        </label>
+                      </div>
+
+                      {/* Interactive Services Selector */}
+                      <div>
+                        <span className="block text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">What solutions are you looking for?</span>
+                        <div className="flex flex-wrap gap-3">
+                          {["Creative Production", "Performance Ads", "Funnel Optimization", "Influencer Strategy"].map((service) => {
+                            const isSelected = selectedServices.includes(service);
+                            return (
+                              <button
+                                key={service}
+                                type="button"
+                                onClick={() => handleServiceToggle(service)}
+                                className={cn(
+                                  "px-5 py-3 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-300",
+                                  isSelected 
+                                    ? "bg-primary text-black border-primary shadow-[0_0_15px_rgba(255,210,0,0.3)]" 
+                                    : "bg-white/5 border-white/10 text-white/60 hover:text-white hover:border-white/30"
+                                )}
+                              >
+                                {service}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Interactive Budget Selector */}
+                      <div>
+                        <span className="block text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">Monthly Advertising Budget</span>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3">
+                          {["< $10k", "$10k - $50k", "$50k - $100k", "$100k+"].map((budget) => {
+                            const isSelected = selectedBudget === budget;
+                            return (
+                              <button
+                                key={budget}
+                                type="button"
+                                onClick={() => setSelectedBudget(budget)}
+                                className={cn(
+                                  "py-3.5 px-3 rounded-2xl border text-center text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap overflow-hidden text-ellipsis",
+                                  isSelected 
+                                    ? "bg-white/10 border-primary text-primary shadow-[0_0_15px_rgba(255,210,0,0.15)]" 
+                                    : "bg-white/5 border-white/10 text-white/50 hover:text-white hover:border-white/20"
+                                )}
+                                title={budget}
+                              >
+                                {budget}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Message Input */}
+                      <div className="relative group">
+                        <textarea 
+                          id="form-message"
+                          rows={4}
+                          value={formData.message}
+                          onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                          placeholder=" "
+                          className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium resize-none"
+                        />
+                        <label 
+                          htmlFor="form-message"
+                          className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
+                        >
+                          Tell us about your brand & goals
+                        </label>
+                      </div>
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-primary hover:bg-white text-black py-5 px-8 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all duration-500 group cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_10px_30px_rgba(255,210,0,0.2)] hover:shadow-[0_15px_40px_rgba(255,215,0,0.35)]"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                            <span className="uppercase tracking-widest text-xs font-black">Initializing Submission...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="uppercase tracking-widest text-xs font-black">SUBMIT QUERY</span>
+                            <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-300" />
+                          </>
+                        )}
+                      </button>
+                    </motion.form>
+                  ) : (
+                    <motion.div 
+                      key="success-card"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                      className="text-center py-12 px-4"
+                    >
+                      <div className="w-24 h-24 bg-primary/10 border-2 border-primary rounded-full flex items-center justify-center mx-auto mb-8 relative">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                          className="text-primary"
+                        >
+                          <CheckCircle2 size={48} />
+                        </motion.div>
+                        <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping opacity-75" />
+                      </div>
+
+                      <span className="bg-primary/20 border border-primary/30 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary mb-6 inline-block">
+                        Submission Received
+                      </span>
+
+                      <h3 className="text-4xl md:text-5xl font-impact uppercase tracking-tighter text-white mb-6">
+                        System Online.<br />
+                        <span className="text-primary italic">We're Processing</span>
+                      </h3>
+
+                      <p className="text-white/50 text-sm max-w-md mx-auto leading-relaxed mb-10 uppercase font-mono text-[11px] tracking-wider">
+                        Thanks <span className="text-white font-bold">{formData.name}</span>. We have received your parameters. Our lead strategist will compile a comprehensive growth roadmap and email it to <span className="text-primary font-bold">{formData.email}</span> within <span className="text-white font-bold">2 hours</span>.
+                      </p>
+
+                      {/* Displaying submitted summary */}
+                      <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-6 text-left max-w-sm mx-auto mb-10 space-y-4">
+                        <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
+                          <span className="text-white/30">Target Brand:</span>
+                          <span className="text-white font-bold">{formData.website || "Pending URL"}</span>
+                        </div>
+                        <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
+                          <span className="text-white/30">Select Services:</span>
+                          <span className="text-primary font-bold">{selectedServices.length > 0 ? selectedServices.slice(0, 2).join(", ") : "Growth Audit"}</span>
+                        </div>
+                        <div className="flex justify-between text-[10px] font-mono uppercase tracking-widest">
+                          <span className="text-white/30">Est. Budget:</span>
+                          <span className="text-white font-bold">{selectedBudget || "Undisclosed"}</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={resetForm}
+                        className="text-xs font-mono font-bold uppercase tracking-widest text-white/40 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1"
+                      >
+                        Submit Another Inquiry
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
+
+
 
       {/* REDESIGNED FOOTER */}
       <footer id="contact" className="group bg-[#050C0A] text-white pt-32 pb-24 border-t border-white/5 relative selection:bg-primary selection:text-black">

@@ -12,7 +12,7 @@ const events: EventData[] = [
   {
     key: "external",
     title: "External Events",
-    cover: "/externalevents.png",
+    cover: "/Activation/Puja Activation - 4.jpeg",
     images: [
       "/externalevents.png",
       "/externalevents.png",
@@ -24,7 +24,7 @@ const events: EventData[] = [
   {
     key: "corporate",
     title: "Corporate Events",
-    cover: "/corporateevents.png",
+    cover: "/Activation/Fabricator7.jpeg",
     images: [
       "/corporateevents.png",
       "/corporateevents.png",
@@ -36,7 +36,7 @@ const events: EventData[] = [
   {
     key: "internal",
     title: "Internal Events",
-    cover: "/internalevents.png",
+    cover: "/Musical Event/Event (2).jpeg",
     images: [
       "/internalevents.png",
       "/internalevents.png",

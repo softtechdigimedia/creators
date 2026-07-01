@@ -11,35 +11,39 @@ type VideoProject = {
 
 const videoProjects: VideoProject[] = [
   {
-    key: "versace-fragrance",
-    name: "Versace Fragrance",
-    meta: "CORSICA, FRANCE 2020",
-    thumbnail: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "",
+    key: "counch-shell",
+    name: "Counch Shell Event",
+    meta: "",
+    thumbnail: "/photo/C0246T01.JPG",
+    videoSrc: "/Video/C0331.mp4",
   },
   {
-    key: "hermes-ski",
-    name: "Hermès Ski",
-    thumbnail: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "",
+    key: "counch-shell-1",
+    name: "Counch Shell Event-1",
+    meta: "",
+    thumbnail: "/photo/C0276T01.JPG",
+    videoSrc: "/Video/C0336.mp4",
   },
   {
-    key: "dior-rouge",
-    name: "Dior Rouge",
-    thumbnail: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "",
+    key: "jatra",
+    meta: "",
+    name: "Jatra activation",
+    thumbnail: "/Activation/Jatra- Activation-1.jpeg",
+    videoSrc: "/Video/Jatra-5.mp4",
   },
   {
-    key: "vogue-independents",
-    name: "Vogue The Independents",
-    thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "",
+    key: "puja-activation",
+    name: "Puja Activation",
+    meta: "",
+    thumbnail: "/Activation/Puja Activation - 8.jpeg",
+    videoSrc: "/Video/Puja Activation - 9.mp4",
   },
   {
-    key: "louis-vuitton-cruise",
-    name: "Louis Vuitton Cruise",
-    thumbnail: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "",
+    key: "dominos",
+    name: "Dominos ",
+    meta: "",
+    thumbnail: "/Dominos/Dominos3.jpeg",
+    videoSrc: "/Video/Dominos (1).mp4",
   },
 ];
 
@@ -54,6 +58,7 @@ function VideoModal({ project, onClose }: { project: VideoProject; onClose: () =
       window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
+
 
   return (
     <div
@@ -91,7 +96,10 @@ function VideoModal({ project, onClose }: { project: VideoProject; onClose: () =
               src={project.videoSrc}
               poster={project.thumbnail}
               controls
+              loop
               autoPlay
+              muted
+              playsInline
               className="w-full h-full object-cover"
             />
           ) : (
@@ -134,9 +142,7 @@ export default function VideoShowcaseSection() {
     };
   }, []);
 
-  // Duplicate the list so the marquee can loop seamlessly:
-  // once the first set scrolls fully past, the second identical set
-  // is right there to continue without a visible jump/reset.
+ 
   const loopedProjects = [...videoProjects, ...videoProjects];
 
   return (
