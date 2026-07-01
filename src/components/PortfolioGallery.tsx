@@ -164,6 +164,34 @@ const projects = [
       "/Activation/Puja Activation - 2.jpeg",
     ],
   },
+
+     {
+    title: "ITC CANTER",
+    category: "Sales Activation",
+    img: "/ITC CANTER/ITC Canter1.jpeg",
+    description: "Festive season sales activation across regions.",
+    gallery: [
+      "/ITC CANTER/ITC Canter1.jpeg",
+      "/ITC CANTER/ITC Canter2.jpeg",
+      "/ITC CANTER/ITC Canter3.jpeg",
+      "/ITC CANTER/ITC Canter4.jpeg",
+      "/ITC CANTER/ITC Canter5.jpeg",
+      "/ITC CANTER/ITC Canter6.jpeg",
+      "",
+    ],
+  },
+   {
+    title: "mOVIE pROMOTION",
+    category: "Promotion",
+    img: "/Movie/Movie Campaign1.jpeg",
+    description: "Festive season sales activation across regions.",
+    gallery: [
+      "/Movie/Movie Campaign1.jpeg",
+      "/Movie/Movie Campaign2.jpeg",
+      "/Movie/Movie Promotion1.jpeg",
+      "/Movie/Movie Promotio2.jpeg",
+    ],
+  },
     {
     title: "jatra activation",
     category: "Sales Activation",
