@@ -1126,35 +1126,8 @@ useEffect(() => {
       {/* NEW JOURNEY & INSIGHTS SECTION */}
       <section className="py-24 bg-[#050C0A] border-t border-white/5">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Journey Card */}
-            <div className="gsap-reveal">
-              <Zap className="text-amber-400 mb-6" size={24} />
-              <h3 className="text-3xl font-display font-medium mb-6">The science of scaling</h3>
-              <p className="text-white/40 text-sm leading-relaxed mb-8">
-                Marketing isn't a guessing game. Our methodology is built on aggressive testing and ruthless data optimization.
-              </p>
-              <a href="#" className="inline-flex items-center gap-2 text-sm font-bold border-b border-white hover:text-primary hover:border-primary transition-all pb-1">
-                Explore Methodology <ArrowRight size={16} />
-              </a>
-            </div>
-
-            {/* Insights Card */}
-            <div className="gsap-reveal group cursor-pointer">
-              <div className="relative aspect-video rounded-3xl overflow-hidden mb-8">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" alt="Insights" className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-black">
-                    <BarChart3 size={24} />
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm font-medium mb-6 leading-relaxed group-hover:text-primary transition-colors">Real-world data and elite marketing insights to help you scale past your limits.</p>
-              <a href="#" className="inline-flex items-center gap-2 text-sm font-bold border-b border-white hover:text-primary hover:border-primary transition-all pb-1">
-                Read Strategies <ArrowRight size={16} />
-              </a>
-            </div>
-
+          <div className="grid md:grid-cols-1 gap-8">
+    
             {/* Review Card Carousel */}
             <div 
               onMouseEnter={() => setIsCarouselPaused(true)}
@@ -1221,7 +1194,7 @@ useEffect(() => {
                 </div>
               </div>
 
-              <div className="relative z-10 flex items-center gap-4 mt-8">
+              <div className="relative z-10 flex items-center gap-4 mt-2">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div 
                     key={currentTestimonial}
@@ -1305,6 +1278,9 @@ useEffect(() => {
           </div>
         </div>
       </section>
+
+
+
             <section id="contact-form" className="py-24 md:py-40 bg-[#030807] border-t border-white/5 relative overflow-hidden selection:bg-primary selection:text-black">
         {/* Ambient background glows */}
         <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -1403,11 +1379,29 @@ useEffect(() => {
                             htmlFor="form-email"
                             className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
                           >
-                            Work Email *
+                            Phone no *
                           </label>
                         </div>
                       </div>
 
+                        <div className="relative group">
+                          <input 
+                            type="email" 
+                            required
+                            id="form-email"
+                            value={formData.email}
+                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                            placeholder=" "
+                            className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium"
+                          />
+                          <label 
+                            htmlFor="form-email"
+                            className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
+                          >
+                            Work Email *
+                          </label>
+                        </div>
+                      
                       {/* Company website input */}
                       <div className="relative group">
                         <input 
