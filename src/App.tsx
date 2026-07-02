@@ -7,8 +7,10 @@ import Lenis from 'lenis';
 import { cn } from './lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import PortfolioGallery from './components/PortfolioGallery';
-import EventsGallery from './components/EventsGallery';
-import VideoShowcaseSection from './components/VideoShowcaseSection';
+
+import ServicesPage from './components/ServicesPage';
+import EventsPage from './components/EventsPage';
+import AboutPage from './components/AboutPage';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -55,6 +57,7 @@ const ClientItem = ({ name, img }: { name: string; img: string | null }) => (
 );
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'event' | 'about'>('home');
   const container = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -309,12 +312,31 @@ useEffect(() => {
   }, { scope: container });
 
   const navLinks = [
-    { label: "Our Story", href: "#about" },
-    { label: "Strategies", href: "#strengths" },
-    { label: "Expertise", href: "#services" },
-    { label: "Success Stories", href: "#projects" },
-    { label: "Partners", href: "#clients" },
+    { label: "Home", id: "home" as const },
+    { label: "About Us", id: "about" as const },
+    { label: "Services", id: "services" as const },
+    { label: "Events & Experience", id: "event" as const } 
   ];
+
+    const handlePageChange = (page: 'home' | 'services' | 'event' | 'about') => {
+    // Kill existing ScrollTriggers before page unmount to avoid pin spacing errors
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    setCurrentPage(page);
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
 
   const testimonials = [
     {
@@ -343,6 +365,7 @@ useEffect(() => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     website: '',
     message: '',
   });
@@ -372,7 +395,7 @@ useEffect(() => {
   };
 
   const resetForm = () => {
-    setFormData({ name: '', email: '', website: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', website: '', message: '' });
     setSelectedServices([]);
     setSelectedBudget('');
     setIsSubmitted(false);
@@ -451,20 +474,34 @@ useEffect(() => {
       </AnimatePresence>
 
       {/* Navigation */}
-      <nav className="fixed top-1 w-full z-50 bg-dark/60 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center h-20">
-        <div className="flex items-center gap-2">
+            <nav className="fixed top-0 w-full z-50 bg-dark/60 backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center h-20">
+    <div className="flex items-center gap-2">
          <img src="/logo.jpeg" alt="Logo" className='w-40 h-15 rounded-2xl ' />
         </div>
         
-        <div className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">
+        <div className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-[0.2em]">
           {navLinks.map(link => (
-            <a key={link.label} href={link.href} className="hover:text-primary hover:opacity-100 transition-all">{link.label}</a>
+            <button 
+              key={link.id} 
+              onClick={() => handlePageChange(link.id)} 
+              className={cn(
+                "cursor-pointer transition-all hover:text-primary focus:outline-none",
+                currentPage === link.id ? "text-primary opacity-100 font-black scale-105" : "text-white opacity-60 hover:opacity-100"
+              )}
+            >
+              {link.label}
+            </button>
           ))}
         </div>
 
         <div className="flex items-center gap-6">
-          <a href="#contact" className="hidden sm:block border border-white/20 px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all rounded-full">Contact Agency</a>
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button 
+            onClick={scrollToContact} 
+            className="hidden sm:block border border-white/20 px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black hover:border-white transition-all rounded-full cursor-pointer focus:outline-none"
+          >
+            Contact Agency
+          </button>
+          <button className="md:hidden text-white cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -473,13 +510,32 @@ useEffect(() => {
         {isMenuOpen && (
           <div className="md:hidden fixed inset-0 top-20 bg-dark z-40 p-8 flex flex-col gap-8 text-4xl font-display font-bold">
             {navLinks.map(link => (
-              <a key={link.label} href={link.href} onClick={() => setIsMenuOpen(false)}>{link.label}</a>
+              <button 
+                key={link.id} 
+                onClick={() => handlePageChange(link.id)} 
+                className={cn(
+                  "text-left cursor-pointer transition-colors hover:text-primary focus:outline-none",
+                  currentPage === link.id ? "text-primary" : "text-white opacity-70"
+                )}
+              >
+                {link.label}
+              </button>
             ))}
-            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-primary">Contact</a>
+            <button 
+              onClick={() => {
+                setIsMenuOpen(false);
+                scrollToContact();
+              }} 
+              className="text-primary text-left cursor-pointer focus:outline-none"
+            >
+              Contact
+            </button>
           </div>
         )}
       </nav>
+  {currentPage === 'home' ? (
 
+      <>
       <main className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-32 pb-24">
         {/* NEW QUANTIVIZE-STYLE HERO */}
         <section className="mb-32 relative bg-primary rounded-[60px] overflow-hidden py-32 text-black">
@@ -878,51 +934,9 @@ useEffect(() => {
         </div>
       </div>
 
-        {/* AI IMAGE GENERATION SECTION (EXACT REPLICA) */}
-        <section className="py-32 relative overflow-hidden bg-black mt-24 rounded-[60px] border border-white/5 mx-auto max-w-[1440px]">
-          {/* Background Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 blur-[160px] rounded-full pointer-events-none" />
-          
-          <div className="max-w-5xl mx-auto px-6 text-center relative z-10 mb-24">
-            <h2 className="text-5xl md:text-7xl font-display font-medium tracking-tight mb-6 leading-tight whitespace-pre-wrap">
-              Generate High-Converting Ads<br />
-              <span className="font-impact italic text-primary">with Just a Prompt</span>
-            </h2>
-            <p className="text-white/40 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-              Create ad-ready high-quality visuals in seconds. Stop waiting for designers and start testing new creatives daily.
-            </p>
-            <button className="bg-white/5 border border-white/10 hover:border-primary/50 text-white px-8 py-4 rounded-full font-bold flex items-center gap-2 mx-auto transition-all group backdrop-blur-md">
-              Create ad creative <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform text-white/60" />
-            </button>
-          </div>
+   <PortfolioGallery />
 
-      
-        
-
-          {/* Prompt Marquee (NEW) */}
-          <div className="ai-prompt-marquee overflow-hidden mb-32 border-y border-white/5 py-8 relative whitespace-nowrap">
-             <div className="ai-marquee-inner inline-block">
-                {[...Array(2)].map((_, i) => (
-                  <div key={i} className="inline-flex gap-12 items-center px-6">
-                    {["PERFORMANCE ADS", "ROI OPTIMIZATION", "FUNNEL STRATEGY", "META ADS SCALING", "GOOGLE ADS DOMINANCE", "CONVERSION RATE OPTIMIZATION"].map((text, j) => (
-                      <div key={j} className="flex items-center gap-6">
-                        <span className="text-4xl md:text-6xl font-impact opacity-10 hover:opacity-100 transition-opacity cursor-default uppercase">{text}</span>
-                        <div className="w-3 h-3 bg-primary rounded-full opacity-30" />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-             </div>
-          </div>
-        </section>
-
-      </main>
-
-      <PortfolioGallery />
-
-
-      
-      {/* CLIENT TICKER */}
+   {/* CLIENT TICKER */}
    <section id="clients" className="py-24 border-b border-white/5 bg-dark">
     <div className="max-w-[1440px] mx-auto px-12 mb-12 flex items-center gap-6 gsap-reveal">
      <span className="font-mono text-[10px] uppercase font-bold opacity-30 tracking-[0.3em]">
@@ -940,12 +954,9 @@ useEffect(() => {
   </div>
 </section>
 
-      {/* NEW SECTION 1: EVENTS ARC */}
-<EventsGallery />
 
-<VideoShowcaseSection />
 
-      {/* NEW SECTION 2: WE ARE ONE */}
+      {/* SECTION: WE ARE ONE */}
       <section className="min-h-screen grid lg:grid-cols-12 bg-dark border-t border-white/5 overflow-hidden">
         {/* Left Side: Statement */}
         <div className="lg:col-span-4 p-12 md:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 bg-black relative z-10">
@@ -1127,7 +1138,7 @@ useEffect(() => {
       <section className="py-24 bg-[#050C0A] border-t border-white/5">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-1 gap-8">
-    
+
             {/* Review Card Carousel */}
             <div 
               onMouseEnter={() => setIsCarouselPaused(true)}
@@ -1278,17 +1289,24 @@ useEffect(() => {
           </div>
         </div>
       </section>
+      </main>
+      </>
+       ) : currentPage === 'services' ? (
+        <ServicesPage onNavigateToContact={scrollToContact} />
+      ) : currentPage === 'event' ? (
+        <EventsPage onNavigateToContact={scrollToContact} />
+      ) : (
+        <AboutPage onNavigateToContact={scrollToContact} />
+      )}
 
-
-
-            <section id="contact-form" className="py-24 md:py-40 bg-[#030807] border-t border-white/5 relative overflow-hidden selection:bg-primary selection:text-black">
+    <section id="contact-form" className="py-24 md:py-40 bg-[#030807] border-t border-white/5 relative overflow-hidden selection:bg-primary selection:text-black">
         {/* Ambient background glows */}
         <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="absolute bottom-1/4 right-10 w-[500px] h-[500px] bg-[#8E2DE2]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-12 gap-10 xl:gap-20 items-start">
-            
+
             {/* Left Info Column */}
             <div className="lg:col-span-5 gsap-reveal-left">
               <div className="flex items-center gap-3 mb-6">
@@ -1367,16 +1385,16 @@ useEffect(() => {
 
                         <div className="relative group">
                           <input 
-                            type="email" 
+                            type="number" 
                             required
-                            id="form-email"
-                            value={formData.email}
-                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                            id="form-phone"
+                            value={formData.phone}
+                            onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                             placeholder=" "
                             className="w-full bg-white/5 border border-white/10 px-6 py-5 rounded-2xl outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(255,210,0,0.15)] transition-all text-white placeholder-transparent peer text-sm font-medium"
                           />
                           <label 
-                            htmlFor="form-email"
+                            htmlFor="form-phone"
                             className="absolute left-6 top-2 text-white/40 text-[10px] font-mono uppercase tracking-widest transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-primary"
                           >
                             Phone no *
@@ -1502,7 +1520,7 @@ useEffect(() => {
                           </>
                         ) : (
                           <>
-                            <span className="uppercase tracking-widest text-xs font-black">SUBMIT QUERY</span>
+                            <span className="uppercase tracking-widest text-xs font-black">SUBMIT Inquiry</span>
                             <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-300" />
                           </>
                         )}
@@ -1572,8 +1590,6 @@ useEffect(() => {
           </div>
         </div>
       </section>
-
-
 
       {/* REDESIGNED FOOTER */}
       <footer id="contact" className="group bg-[#050C0A] text-white pt-32 pb-24 border-t border-white/5 relative selection:bg-primary selection:text-black">
@@ -1658,7 +1674,6 @@ useEffect(() => {
               <a href="#" className="hover:text-white transition-all">Site Index</a>
             </div>
           </div>
-         
         <div
   ref={containerRef}
   className="mt-40 opacity-100 select-none overflow-visible pb-[100px] footer-crea8ors-container relative"
@@ -1679,7 +1694,7 @@ useEffect(() => {
 </div>
         </div>
         <div className="mt-12 text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 text-center">
-       <a href="#" className="hover:text-white transition-all  ">Designed & Developed by Soft Tech Digi Media</a>
+         <a href="#" className="hover:text-white transition-all">Designed & Developed by Soft Tech Digi Media.</a>
        </div>
       </footer>
     </div>
